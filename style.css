@@ -1,0 +1,213 @@
+:root {
+    --bg-color: #0c0c0c;
+    --text-primary: #f4f4f0;
+    --text-secondary: #8e8e8c;
+    --border-color: rgba(244, 244, 240, 0.12);
+    --accent-gold: #c5a059;
+
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Jost', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.noise-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.lux-container {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+}
+
+.lux-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.edition {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.lux-title {
+    font-family: var(--font-heading);
+    font-size: 7rem;
+    font-weight: 400;
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+.header-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-bottom: 1rem;
+}
+
+.lux-date {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.lux-btn {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 2rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+}
+
+.lux-btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-color);
+}
+
+.brand-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.brand-divider::after {
+    content: '';
+    position: absolute;
+    top: -2px; left: 0;
+    width: 100px; height: 5px;
+    background: var(--accent-gold);
+}
+
+.lux-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 4rem;
+}
+
+.col-heading {
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.accent-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+}
+
+.feed-column {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.card {
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 1px solid transparent;
+    transition: border-color 0.5s ease;
+    animation: fadeIn 0.8s ease-out both;
+}
+
+.card:hover {
+    border-left-color: var(--accent-gold);
+}
+
+.card.new-entry {
+    animation: slideDownFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@keyframes slideDownFade {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@media (max-width: 1024px) {
+    .lux-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .lux-title { font-size: 4rem; }
+}

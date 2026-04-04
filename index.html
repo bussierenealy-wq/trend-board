@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE PULSE. // Premium Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <div class="lux-container">
+        <header class="lux-header">
+            <div class="header-left">
+                <span class="edition">NO. 001 — LIVE EDITION</span>
+                <h1 class="lux-title">全网热点画报</h1>
+            </div>
+            <div class="header-right">
+                <p id="date-display" class="lux-date">Thursday, October 24</p>
+                <button id="force-sync" class="lux-btn">立即同步</button>
+            </div>
+        </header>
+
+        <div class="brand-divider"></div>
+
+        <main class="lux-grid">
+            <section class="lux-col">
+                <h2 class="col-heading">哔哩哔哩热榜 <span class="accent-dot"></span></h2>
+                <div class="feed-column" id="feed-bilibili"></div>
+            </section>
+
+            <section class="lux-col center-col">
+                <h2 class="col-heading">小红书精选 <span class="accent-dot"></span></h2>
+                <div class="feed-column" id="feed-xhs"></div>
+            </section>
+
+            <section class="lux-col">
+                <h2 class="col-heading">雪球财经热议 <span class="accent-dot"></span></h2>
+                <div class="feed-column" id="feed-xueqiu"></div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
