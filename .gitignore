@@ -21,3 +21,7 @@ venv.bak/
 # Playwright & Debugging
 bilibili_debug.html
 *.log
+
+# Test & Debug scripts
+backend/test_*.py
+backend/debug_*.py
