@@ -126,13 +126,44 @@ trend-board/
 
 ---
 
-## ☁️ 云端部署指南（腾讯云 / 阿里云）
+## ☁️ 云端部署指南 (Ubuntu / 腾讯云)
 
-1. 确保服务器已安装 `Docker` 并开放 **TCP 8000** 端口（安全组入站规则）
-2. 克隆代码 → `docker build` → `docker run`
-3. 公网访问 `http://<公网IP>:8000`
+> **核心原则**：生产环境务必使用 Docker 镜像化部署，以规避复杂的 Playwright 浏览器依赖。
 
-详细步骤参见上方 [Docker 一键部署](#方式二docker-一键部署推荐)。
+### 1. 环境初始化
+在 Ubuntu 服务器上快速安装 Docker：
+```bash
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+sudo usermod -aG docker $USER && newgrp docker
+```
+
+### 2. 部署步骤
+直接使用经过生产环境验证的 Dockerfile：
+```bash
+# 克隆仓库
+git clone https://github.com/bussierenealy-wq/trend-board.git
+cd trend-board
+
+# 强制构建（建议禁用缓存以对齐最新依赖）
+docker build --no-cache -t trend-board .
+
+# 启动容器并持久化运行
+docker run -d \
+  --name trend-board \
+  -p 8000:8000 \
+  --restart always \
+  trend-board
+```
+
+### ⚠️ 关键注意事项 (必读)
+
+1. **内网加速**：若在腾讯云构建缓慢，建议配置 Docker 国内镜像加速（`/etc/docker/daemon.json`）。
+2. **端口穿透（三级检查）**：
+   - **云平台层**：腾讯云后台安全组必须开放 **TCP 8000** 端口。
+   - **系统层**：Ubuntu `ufw` 防火墙需执行 `sudo ufw allow 8000/tcp`。
+   - **业务层**：监听地址已锁死为 `0.0.0.0`，请勿修改。
+3. **依赖闭环**：Dockerfile 已预装 `playwright==1.38.0` 及其运行时环境，请勿在宿主机直接 `pip install`。
+4. **日志监控**：若无法启动，执行 `docker logs -f trend-board` 查看实时 Traceback。
 
 ---
 
