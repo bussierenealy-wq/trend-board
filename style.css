@@ -36,7 +36,7 @@ body {
 }
 
 .lux-container {
-    max-width: 1540px;
+    max-width: 1800px;
     margin: 0 auto;
     padding: 4rem 3rem;
 }
@@ -122,8 +122,8 @@ body {
 
 .lux-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 3rem;
 }
 
 .col-heading {

@@ -41,6 +41,7 @@ async function fetchRealData() {
         if(data.bilibili.length > 0) renderPlat('bilibili', data.bilibili);
         if(data.xhs.length > 0) renderPlat('xhs', data.xhs);
         if(data.xueqiu.length > 0) renderPlat('xueqiu', data.xueqiu);
+        if(data.weibo && data.weibo.length > 0) renderPlat('weibo', data.weibo);
         
     } catch (e) {
         console.error("Failed to fetch data, is backend running?", e);
@@ -69,6 +70,7 @@ function init() {
             if(data.bilibili.length > 0) renderPlat('bilibili', data.bilibili);
             if(data.xhs.length > 0) renderPlat('xhs', data.xhs);
             if(data.xueqiu.length > 0) renderPlat('xueqiu', data.xueqiu);
+            if(data.weibo && data.weibo.length > 0) renderPlat('weibo', data.weibo);
         } catch(e) {
             console.error("Sync Error", e);
         }

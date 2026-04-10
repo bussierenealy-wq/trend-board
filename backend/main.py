@@ -7,6 +7,7 @@ import asyncio
 from scrapers.bilibili import fetch_bilibili
 from scrapers.xueqiu import fetch_xueqiu
 from scrapers.xhs import fetch_xhs
+from scrapers.weibo import fetch_weibo
 import uvicorn
 
 app = FastAPI()
@@ -22,20 +23,23 @@ app.add_middleware(
 cache = {
     "bilibili": [],
     "xueqiu": [],
-    "xhs": []
+    "xhs": [],
+    "weibo": []
 }
 
 fallback_data = {
     "bilibili": [{"title": "System Booting", "desc": "等待B站 API 并发连接...", "hot": "Init"}],
     "xueqiu": [{"title": "Data Pipeline", "desc": "正在向雪球申请令牌 Token...", "hot": "Init"}],
-    "xhs": [{"title": "Playwright Engine", "desc": "正在拉起隐身浏览器突破小红书风控墙...", "hot": "Init"}]
+    "xhs": [{"title": "Playwright Engine", "desc": "正在拉起隐身浏览器突破小红书风控墙...", "hot": "Init"}],
+    "weibo": [{"title": "Weibo Connect", "desc": "正在连接微博热搜实时接口...", "hot": "Init"}]
 }
 
 async def update_cache():
     tasks = [
         fetch_bilibili(),
         fetch_xueqiu(),
-        fetch_xhs()
+        fetch_xhs(),
+        fetch_weibo()
     ]
     results = await asyncio.gather(*tasks, return_exceptions=True)
     
@@ -47,6 +51,9 @@ async def update_cache():
 
     if not isinstance(results[2], Exception) and results[2]: cache["xhs"] = results[2]
     else: print("XHS Error:", results[2])
+
+    if not isinstance(results[3], Exception) and results[3]: cache["weibo"] = results[3]
+    else: print("Weibo Error:", results[3])
 
 @app.on_event("startup")
 async def startup_event():
