@@ -3,50 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE PULSE. // Premium Edition</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>TrendBoard Home | Intelligence for All</title>
+    <!-- 引入洋气的 Google 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="noise-overlay"></div>
-    <div class="lux-container">
-        <header class="lux-header">
-            <div class="header-left">
-                <span class="edition">NO. 001 — LIVE EDITION</span>
-                <h1 class="lux-title">全网热点画报</h1>
+<body class="google-style">
+    <div class="app-layout">
+        <!-- 悬浮式侧边导航 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="g-logo">
+                    <span class="dot b"></span><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                </div>
+                <h1>TrendBoard</h1>
             </div>
-            <div class="header-right">
-                <p id="date-display" class="lux-date">Thursday, October 24</p>
-                <button id="force-sync" class="lux-btn">立即同步</button>
+
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span class="label">订阅源同步</span>
+                    <div id="source-toggles" class="toggle-grid">
+                        <!-- JS 注入 -->
+                    </div>
+                </div>
+            </nav>
+
+            <div class="sidebar-actions">
+                <button id="sync-btn" class="fab-btn">
+                    <span class="icon">✨</span>
+                    <span class="text">立即刷新</span>
+                </button>
+                <div id="last-update" class="status-bar">就绪</div>
             </div>
-        </header>
+        </aside>
 
-        <div class="brand-divider"></div>
+        <!-- 主情报大厅 -->
+        <main class="main-stage">
+            <header class="stage-header">
+                <div class="header-content">
+                    <h2>实时洞察 <span class="badge">Live</span></h2>
+                    <p>聚合全网实时趋势，辅助高净值决策</p>
+                </div>
+                <div class="display-adjust">
+                    <button class="view-tab active" data-grid="3">标准</button>
+                    <button class="view-tab" data-grid="4">宽屏</button>
+                </div>
+            </header>
 
-        <main class="lux-grid">
-            <section class="lux-col">
-                <h2 class="col-heading">哔哩哔哩热榜 <span class="accent-dot"></span></h2>
-                <div class="feed-column" id="feed-bilibili"></div>
-            </section>
-
-            <section class="lux-col center-col">
-                <h2 class="col-heading">小红书精选 <span class="accent-dot"></span></h2>
-                <div class="feed-column" id="feed-xhs"></div>
-            </section>
-
-            <section class="lux-col">
-                <h2 class="col-heading">雪球财经热议 <span class="accent-dot"></span></h2>
-                <div class="feed-column" id="feed-xueqiu"></div>
-            </section>
-
-            <section class="lux-col">
-                <h2 class="col-heading">微博热搜榜 <span class="accent-dot"></span></h2>
-                <div class="feed-column" id="feed-weibo"></div>
-            </section>
+            <div class="scroll-area">
+                <div class="masonry-grid" id="trends-board">
+                    <!-- 动态卡片 -->
+                </div>
+            </div>
         </main>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
