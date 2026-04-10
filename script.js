@@ -4,7 +4,9 @@ const platformConfig = {
     xhs: { name: '小红书精选', icon: '🌸', active: true },
     weibo: { name: '微博热搜', icon: '🔥', active: true },
     xueqiu: { name: '雪球财经', icon: '📈', active: true },
-    '36kr': { name: '36氪热门', icon: '💡', active: true }
+    '36kr': { name: '36氪热门', icon: '💡', active: true },
+    wscn: { name: '华尔街见闻', icon: '🌍', active: true },
+    cls: { name: '财联社电报', icon: '📈', active: true }
 };
 
 document.addEventListener('DOMContentLoaded', () => {

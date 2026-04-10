@@ -9,6 +9,7 @@ from scrapers.xueqiu import fetch_xueqiu
 from scrapers.xhs import fetch_xhs
 from scrapers.weibo import fetch_weibo
 from scrapers.kr36 import fetch_36kr
+from scrapers.financial import fetch_wscn, fetch_cls
 import uvicorn
 
 app = FastAPI()
@@ -26,7 +27,9 @@ cache = {
     "xueqiu": [],
     "xhs": [],
     "weibo": [],
-    "36kr": []
+    "36kr": [],
+    "wscn": [],
+    "cls": []
 }
 
 fallback_data = {
@@ -34,7 +37,9 @@ fallback_data = {
     "xueqiu": [{"title": "Data Pipeline", "desc": "正在向雪球申请令牌 Token...", "hot": "Init"}],
     "xhs": [{"title": "Playwright Engine", "desc": "正在拉起隐身浏览器突破小红书风控墙...", "hot": "Init"}],
     "weibo": [{"title": "Weibo Connect", "desc": "正在连接微博热搜实时接口...", "hot": "Init"}],
-    "36kr": [{"title": "36Kr Insight", "desc": "正在获取商业前沿快讯...", "hot": "Init"}]
+    "36kr": [{"title": "36Kr Insight", "desc": "正在获取商业前沿快讯...", "hot": "Init"}],
+    "wscn": [{"title": "WSCN Live", "desc": "正在连接华尔街见闻实时电报...", "hot": "Init"}],
+    "cls": [{"title": "CLS Telegraph", "desc": "正在请求财联社一线电报数据...", "hot": "Init"}]
 }
 
 async def update_cache():
@@ -43,7 +48,9 @@ async def update_cache():
         fetch_xueqiu(),
         fetch_xhs(),
         fetch_weibo(),
-        fetch_36kr()
+        fetch_36kr(),
+        fetch_wscn(),
+        fetch_cls()
     ]
     results = await asyncio.gather(*tasks, return_exceptions=True)
     
@@ -61,6 +68,12 @@ async def update_cache():
 
     if not isinstance(results[4], Exception) and results[4]: cache["36kr"] = results[4]
     else: print("36Kr Error:", results[4])
+
+    if not isinstance(results[5], Exception) and results[5]: cache["wscn"] = results[5]
+    else: print("WSCN Error:", results[5])
+
+    if not isinstance(results[6], Exception) and results[6]: cache["cls"] = results[6]
+    else: print("CLS Error:", results[6])
 
 @app.on_event("startup")
 async def startup_event():
